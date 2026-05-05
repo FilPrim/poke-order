@@ -1,0 +1,47 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 20px 16px;
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 80px;
+  width: 100%;
+  text-align: center;
+}
+
+.card:hover {
+  border-color: #f97316;
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.15);
+  transform: translateY(-2px);
+}
+
+.card.inCart {
+  border-color: #22c55e;
+  background: #f0fdf4;
+}
+
+.card.inCart:hover {
+  border-color: #16a34a;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.15);
+}
+
+.name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.badge {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #16a34a;
+  background: #dcfce7;
+  padding: 2px 8px;
+  border-radius: 99px;
+}

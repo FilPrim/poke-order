@@ -1,35 +1,68 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// Componente principale dell'app Poke Order.
+// Gestisce lo stato globale: colleghi caricati da data.json, collega selezionato e carrello.
+import { useState } from 'react';
+import { colleghi, ingredienti } from './data/data.json';
+import ColleagueList from './components/ColleagueList';
+import PokeEditor from './components/PokeEditor';
+import Cart from './components/Cart';
+import styles from './App.module.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [selectedColleague, setSelectedColleague] = useState(null);
+  const [cart, setCart] = useState([]);
+
+  const cartIds = new Set(cart.map((item) => item.colleague.id));
+
+  function handleSelectColleague(colleague) {
+    setSelectedColleague(colleague);
+  }
+
+  function handleConfirmPoke(colleague, poke) {
+    setCart((prev) => [
+      ...prev,
+      { id: `${colleague.id}-${Date.now()}`, colleague, poke },
+    ]);
+    setSelectedColleague(null);
+  }
+
+  function handleRemoveFromCart(itemId) {
+    setCart((prev) => prev.filter((item) => item.id !== itemId));
+  }
+
+  function handleCloseEditor() {
+    setSelectedColleague(null);
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className={styles.app}>
+      <header className={styles.header}>
+        <h1 className={styles.logo}>🍣 Poke Order</h1>
+        <p className={styles.subtitle}>Gestisci gli ordini del tuo ufficio</p>
+      </header>
+
+      <main className={styles.main}>
+        <div className={styles.left}>
+          <ColleagueList
+            colleagues={colleghi}
+            onSelect={handleSelectColleague}
+            cartIds={cartIds}
+          />
+        </div>
+        <div className={styles.right}>
+          <Cart cart={cart} onRemove={handleRemoveFromCart} />
+        </div>
+      </main>
+
+      {selectedColleague && (
+        <PokeEditor
+          colleague={selectedColleague}
+          ingredients={ingredienti}
+          onConfirm={handleConfirmPoke}
+          onCancel={handleCloseEditor}
+        />
+      )}
+    </div>
+  );
 }
 
-export default App
+export default App;
