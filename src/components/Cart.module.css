@@ -1,0 +1,117 @@
+.section {
+  width: 100%;
+}
+
+.title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 16px 0;
+}
+
+.empty {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  text-align: center;
+  padding: 32px 16px;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px dashed #e2e8f0;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.itemContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.itemName {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.itemDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.itemDetail {
+  font-size: 0.85rem;
+  color: #475569;
+  line-height: 1.4;
+}
+
+.itemDetail strong {
+  color: #94a3b8;
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+.removeBtn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  font-size: 0.95rem;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.removeBtn:hover {
+  color: #ef4444;
+  background: #fef2f2;
+}
+
+.whatsappBtn {
+  width: 100%;
+  padding: 16px;
+  background: #25d366;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.whatsappBtn:hover {
+  background: #1ebe5a;
+  transform: translateY(-1px);
+}
+
+.whatsappBtn:active {
+  transform: translateY(0);
+}
