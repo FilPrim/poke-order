@@ -1,0 +1,244 @@
+[
+  {
+    "nome": "Filippo",
+    "cognome": "Primatesta",
+    "pokeBase": {
+      "dimensione": "regular",
+      "base": ["riso misto due tipi"],
+      "proteine": ["salmone marinato", "gamberi crudi"],
+      "condimenti": ["avocado", "edamame", "pomodori secchi", "stracciatella"],
+      "salse": ["salsa ponzu", "salsa teriyaki"],
+      "toppings": ["cipolla croccante", "arachidi"]
+    }
+  },
+  {
+    "nome": "Guido",
+    "cognome": "Maffettone",
+    "pokeBase": {
+      "dimensione": "regular",
+      "base": ["riso bianco"],
+      "proteine": ["salmone crudo", "salmone marinato"],
+      "condimenti": ["mango", "avocado", "edamame", "philadelphia"],
+      "salse": ["salsa di soia"],
+      "toppings": ["cocco grattuggiato", "noci"]
+    }
+  },
+  {
+    "nome": "Marta",
+    "cognome": "Caldarini",
+    "pokeBase": {
+      "dimensione": "regular",
+      "base": ["riso bianco", "insalata"],
+      "proteine": ["salmone marinato", "gamberi crudi"],
+      "condimenti": ["avocado", "mango", "stracciatella", "carote marinate"],
+      "salse": ["salsa teriyaki", "salsa ponzu"],
+      "toppings": ["mandorle", "cipolla croccante"]
+    }
+  },
+  {
+    "nome": "Pamela",
+    "cognome": "Anderson",
+    "pokeBase": {
+      "dimensione": "regular",
+      "base": ["riso bianco", "insalata"],
+      "proteine": ["salmone crudo", "gamberi cotti"],
+      "condimenti": ["avocado", "edamame", "cavolo rosso marinato", "carote marinate"],
+      "salse": ["salsa teriyaki", "salsa di soia"],
+      "toppings": ["arachidi", "mandorle"]
+    }
+  },
+  {
+    "nome": "Matteo",
+    "cognome": "Rossi",
+    "pokeBase": {
+      "dimensione": "regular",
+      "base": ["riso basmati"],
+      "proteine": ["salmone crudo"],
+      "condimenti": ["mango", "edamame", "avocado", "philadelphia"],
+      "salse": ["salsa di soia"],
+      "toppings": ["cipolla croccante", "sesamo"]
+    }
+  },
+  {
+    "nome": "Christian",
+    "cognome": "Finetti",
+    "pokeBase": {
+      "dimensione": "regular",
+      "base": ["riso bianco"],
+      "proteine": ["salmone crudo", "salmone marinato"],
+      "condimenti": ["mais", "edamame", "pomodorini", "philadelphia"],
+      "salse": ["salsa di soia"],
+      "toppings": ["noci", "arachidi"]
+    }
+  },
+  {
+    "nome": "Giulio",
+    "cognome": "Balestrieri",
+    "pokeBase": {
+      "dimensione": "regular",
+      "defaultPoke": true,
+      "nomeDefault": "salmon poke bowl",
+      "base": [],
+      "proteine": [],
+      "condimenti": [],
+      "salse": [],
+      "toppings": []
+    }
+  },
+  {
+    "nome": "Simone",
+    "cognome": "Rondi",
+    "pokeBase": {
+      "dimensione": "regular",
+      "base": ["riso bianco"],
+      "proteine": ["sashimi salmone", "tonno"],
+      "condimenti": ["edamame", "zucchine", "pomodorini"],
+      "salse": ["salsa teriyaki", "salsa di soia"],
+      "toppings": ["noci", "pistacchi"]
+    }
+  },
+  {
+    "nome": "Mauro",
+    "cognome": "Mistretta",
+    "pokeBase": {
+      "dimensione": "regular",
+      "base": ["riso misto due tipi", "insalata"],
+      "proteine": ["sashimi salmone", "polpo cotto"],
+      "condimenti": ["avocado", "mango", "goma wakame", "ananas"],
+      "salse": ["salsa tropicale", "salsa yogurt"],
+      "toppings": ["pistacchi", "scaglie di tonno affumicato"]
+    }
+  },
+  {
+    "nome": "Daniele",
+    "cognome": "Mule",
+    "pokeBase": {
+      "dimensione": "regular",
+      "base": ["riso misto due tipi"],
+      "proteine": ["salmone cotto"],
+      "condimenti": ["goma wakame", "ceci", "germogli di soia", "tobiko"],
+      "salse": ["salsa teriyaki"],
+      "toppings": ["pistacchi", "alga nori"]
+    }
+  },
+  {
+    "nome": "Andrea",
+    "cognome": "Sorteni",
+    "pokeBase": {
+      "dimensione": "regular",
+      "base": ["riso bianco"],
+      "proteine": ["salmone crudo", "gamberi cotti"],
+      "condimenti": ["edamame", "avocado", "germogli di soia", "pomodorini"],
+      "salse": ["salsa di soia", "maionese"],
+      "toppings": ["cipolla croccante", "sesamo"]
+    }
+  },
+  {
+    "nome": "Tommaso",
+    "cognome": "Bertocchi",
+    "pokeBase": {
+      "dimensione": "regular",
+      "base": ["insalata"],
+      "proteine": ["gamberi cotti", "branzino cotto"],
+      "condimenti": ["pomodori secchi", "avocado", "stracciatella", "goma wakame"],
+      "salse": ["salsa teriyaki"],
+      "toppings": ["alga nori", "sesamo"]
+    }
+  },
+  {
+    "nome": "Filippo",
+    "cognome": "Miramonti",
+    "pokeBase": {
+      "dimensione": "large",
+      "base": ["riso misto due tipi"],
+      "proteine": ["gamberi fritti", "salmone piccante", "tonno"],
+      "condimenti": ["cipolla caramellata", "pomodori secchi", "germogli di soia", "goma wakame", "tobiko"],
+      "salse": ["salsa agropiccante", "salsa teriyaki"],
+      "toppings": ["chips di platano", "cipolla croccante"]
+    }
+  },
+  {
+    "nome": "Marco",
+    "cognome": "Galimi",
+    "pokeBase": {
+      "dimensione": "regular",
+      "base": ["insalata"],
+      "proteine": ["tonno", "gamberi cotti"],
+      "condimenti": ["goma wakame", "avocado", "edamame", "cavolo rosso marinato"],
+      "salse": ["salsa teriyaki", "salsa di soia"],
+      "toppings": ["sesamo"]
+    }
+  },
+  {
+    "nome": "Alessandro",
+    "cognome": "Botti",
+    "pokeBase": {
+      "dimensione": "regular",
+      "base": ["riso bianco"],
+      "proteine": ["sashimi salmone", "gamberi fritti"],
+      "condimenti": ["cipolla caramellata", "stracciatella"],
+      "salse": ["salsa di soia"],
+      "toppings": ["cipolla croccante"]
+    }
+  },
+  {
+    "nome": "Ilaria",
+    "cognome": "",
+    "pokeBase": {
+      "dimensione": "regular",
+      "base": ["riso bianco"],
+      "proteine": ["salmone marinato", "tonno"],
+      "condimenti": ["avocado", "feta greca", "cavolo rosso marinato", "pomodorini"],
+      "salse": ["salsa ponzu", "salsa teriyaki"],
+      "toppings": ["alga nori", "sesamo"]
+    }
+  },
+  {
+    "nome": "Lal",
+    "cognome": "Akin",
+    "pokeBase": {
+      "dimensione": "regular",
+      "base": ["insalata", "riso nero"],
+      "proteine": ["pollo salsa teriyaki"],
+      "condimenti": ["pomodorini", "cetrioli", "avocado", "feta greca"],
+      "salse": ["salsa yogurt"],
+      "toppings": ["cipolla croccante"]
+    }
+  },
+  {
+    "nome": "Ceren",
+    "cognome": "Yaman",
+    "pokeBase": {
+      "dimensione": "regular",
+      "base": ["insalata", "riso nero"],
+      "proteine": ["branzino cotto", "gamberi cotti"],
+      "condimenti": ["ananas", "avocado", "zucchine", "feta greca"],
+      "salse": ["salsa kimchi", "salsa di sesamo"],
+      "toppings": ["noci", "semi di girasole"]
+    }
+  },
+  {
+    "nome": "Matteo",
+    "cognome": "Pisoni",
+    "pokeBase": {
+      "dimensione": "regular",
+      "base": ["riso bianco"],
+      "proteine": ["salmone crudo", "tonno"],
+      "condimenti": ["avocado", "edamame", "zenzero", "cavolo rosso marinato"],
+      "salse": ["salsa teriyaki", "salsa di soia"],
+      "toppings": ["mandorle", "anacardi"]
+    }
+  },
+  {
+    "nome": "Marco",
+    "cognome": "Marino",
+    "pokeBase": {
+      "dimensione": "regular",
+      "base": ["riso bianco"],
+      "proteine": ["salmone cotto", "salmone piccante"],
+      "condimenti": ["patate dolci", "philadelphia", "cipolla caramellata", "cavolo rosso marinato"],
+      "salse": ["salsa teriyaki", "spicy mayo"],
+      "toppings": ["cipolla croccante", "arachidi"]
+    }
+  }
+]
