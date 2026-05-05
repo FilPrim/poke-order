@@ -1,0 +1,12 @@
+---
+description: Convenzioni React per componenti JSX
+globs: ["src/**/*.jsx"]
+alwaysApply: false
+---
+
+# Convenzioni React
+
+- Usa functional components.
+- Usa CSS Modules per gli stili.
+- Ogni componente deve stare in `src/components/` in un file separato.
+- Aggiungi un commento in cima a ogni componente.

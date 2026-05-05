@@ -1,0 +1,15 @@
+---
+description: Regole generali del progetto poke order
+alwaysApply: true
+---
+
+# Contesto progetto
+
+- Questo e un progetto React con Vite per gestire gli ordini di poke bowl in ufficio.
+- I dati principali sono in `src/data/data.json`.
+- Il componente principale dell'applicazione e `App.jsx`.
+
+# Regole di risposta
+
+- Dimmi sempre quale file tocchi e perche.
+- Rispondimi sempre in italiano.
