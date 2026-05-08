@@ -1,3 +1,10 @@
 ---
-alwaysApply: true
+description: Regole per gestione dati
+globs: ["src/data/*.json", "src/config.js"]
+alwaysApply: false
 ---
+
+- data.json è la fonte di verità per colleghi e ingredienti
+- Non duplicare mai dati già presenti in data.json dentro i componenti
+- Il numero WhatsApp vive solo in src/config.js, mai altrove
+- Quando aggiungi campi a data.json aggiorna anche la struttura di tutti i colleghi esistenti, non solo uno
