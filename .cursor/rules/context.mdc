@@ -1,3 +1,23 @@
 ---
+description: Aggiornamento contesto progetto
 alwaysApply: true
 ---
+
+Esiste un file PROJECT_CONTEXT.md nella root del progetto.
+Questo file contiene sempre lo stato aggiornato del progetto.
+
+Aggiornalo automaticamente quando:
+- Completi un miglioramento o una feature
+- Modifichi la struttura dei componenti o dei dati
+- Risolvi un bug significativo
+
+Il file deve sempre contenere queste sezioni:
+- Descrizione del progetto (cosa fa, a chi serve)
+- Stack tecnico
+- Struttura file e componenti con una riga di descrizione per ognuno
+- Stato attuale (cosa funziona)
+- Ultime modifiche (le ultime 3-5 cose fatte)
+- Prossimi passi (se noti TODO o cose incomplete)
+
+Quando l'utente scrive "aggiorna contesto", aggiorna PROJECT_CONTEXT.md
+prima di fare qualsiasi altra cosa.
