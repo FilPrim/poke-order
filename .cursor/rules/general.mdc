@@ -13,3 +13,15 @@ alwaysApply: true
 
 - Dimmi sempre quale file tocchi e perche.
 - Rispondimi sempre in italiano.
+- Prima di implementare qualsiasi modifica, leggi tutti i file coinvolti
+- Non rimuovere mai funzionalità esistenti che funzionano
+- Se una modifica tocca lo stato globale in App.jsx, segnalalo esplicitamente
+
+# Workflow Git (obbligatorio)
+
+- Non pushare mai direttamente su `main` quando ci sono modifiche funzionali.
+- Per ogni task crea o usa un branch feature dedicato (es. `feature/...`).
+- Fai commit sul branch feature e pusha solo quel branch.
+- Apri sempre una Pull Request verso `main` con riepilogo modifiche e test.
+- Esegui il merge su `main` solo dopo approvazione PR.
+- Se l'utente chiede di pushare su `main` direttamente, chiedi prima conferma esplicita che vuole saltare il flusso PR.
