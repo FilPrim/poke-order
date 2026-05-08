@@ -12,19 +12,20 @@
   justify-content: center;
   gap: 6px;
   padding: 20px 36px 20px 16px;
-  background: #ffffff;
-  border: 2px solid #e2e8f0;
+  background: var(--bg-surface);
+  border: 2px solid var(--border);
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s ease;
   min-height: 80px;
   width: 100%;
   text-align: center;
+  color: var(--text-primary);
 }
 
 .card:not(:disabled):hover {
-  border-color: #f97316;
-  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.15);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-accent);
   transform: translateY(-2px);
 }
 
@@ -34,21 +35,21 @@
 }
 
 .wrapper.inCart .card {
-  border-color: #22c55e;
-  background: #f0fdf4;
+  border-color: var(--success-soft-border);
+  background: var(--success-soft-bg);
 }
 
 .name {
   font-size: 1rem;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--text-primary);
 }
 
 .badge {
   font-size: 0.72rem;
   font-weight: 500;
-  color: #16a34a;
-  background: #dcfce7;
+  color: var(--success-soft-text);
+  background: var(--success-soft-bg);
   padding: 2px 8px;
   border-radius: 99px;
 }
@@ -67,13 +68,13 @@
   border-radius: 50%;
   font-size: 1.1rem;
   line-height: 1;
-  color: #cbd5e1;
+  color: var(--text-muted);
   cursor: pointer;
   padding: 0;
   transition: color 0.15s, background 0.15s;
 }
 
 .deleteBtn:hover {
-  color: #ef4444;
-  background: #fef2f2;
+  color: var(--danger);
+  background: var(--danger-soft-bg);
 }

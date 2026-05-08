@@ -5,20 +5,20 @@
 .title {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #64748b;
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin: 0 0 16px 0;
 }
 
 .empty {
-  color: #94a3b8;
+  color: var(--text-muted);
   font-size: 0.95rem;
   text-align: center;
   padding: 32px 16px;
-  background: #f8fafc;
+  background: var(--bg-surface-2);
   border-radius: 12px;
-  border: 1px dashed #e2e8f0;
+  border: 1px dashed var(--border);
 }
 
 .list {
@@ -34,8 +34,8 @@
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 14px 16px;
 }
@@ -51,7 +51,7 @@
 .itemName {
   font-size: 1rem;
   font-weight: 700;
-  color: #1e293b;
+  color: var(--text-primary);
 }
 
 .itemDetails {
@@ -62,12 +62,12 @@
 
 .itemDetail {
   font-size: 0.85rem;
-  color: #475569;
+  color: var(--text-secondary);
   line-height: 1.4;
 }
 
 .itemDetail strong {
-  color: #94a3b8;
+  color: var(--text-muted);
   font-weight: 600;
   margin-right: 4px;
 }
@@ -75,7 +75,7 @@
 .removeBtn {
   background: none;
   border: none;
-  color: #94a3b8;
+  color: var(--text-muted);
   cursor: pointer;
   font-size: 0.95rem;
   padding: 4px 6px;
@@ -86,14 +86,14 @@
 }
 
 .removeBtn:hover {
-  color: #ef4444;
-  background: #fef2f2;
+  color: var(--danger);
+  background: var(--danger-soft-bg);
 }
 
 .itemDimensione {
   font-size: 0.85rem;
   font-weight: 500;
-  color: #94a3b8;
+  color: var(--text-muted);
 }
 
 .orarioRow {
@@ -106,37 +106,37 @@
 .orarioLabel {
   font-size: 0.88rem;
   font-weight: 600;
-  color: #64748b;
+  color: var(--text-secondary);
   white-space: nowrap;
 }
 
 .orarioSelect {
   flex: 1;
   padding: 9px 12px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border);
   border-radius: 8px;
   font-size: 0.9rem;
   font-family: inherit;
-  color: #1e293b;
-  background: #ffffff;
+  color: var(--text-primary);
+  background: var(--bg-surface);
   cursor: pointer;
   transition: border-color 0.15s;
 }
 
 .orarioSelect:focus {
   outline: none;
-  border-color: #f97316;
+  border-color: var(--accent);
 }
 
 .whatsappBtn {
   width: 100%;
   padding: 16px;
-  background: #25d366;
+  background: var(--whatsapp);
   border: none;
   border-radius: 12px;
   font-size: 1rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--text-on-accent);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -146,7 +146,7 @@
 }
 
 .whatsappBtn:hover {
-  background: #1ebe5a;
+  background: var(--whatsapp-hover);
   transform: translateY(-1px);
 }
 
@@ -155,7 +155,7 @@
 }
 
 .whatsappBtn:disabled {
-  background: #94a3b8;
+  background: var(--disabled-bg);
   cursor: not-allowed;
   transform: none;
 }
