@@ -51,35 +51,49 @@
   background: #f1f5f9;
 }
 
-/* Default poke */
-.defaultPoke {
-  padding: 24px;
-  text-align: center;
+/* Campi nome/cognome */
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 24px 0;
 }
 
-.defaultLabel {
-  font-size: 0.9rem;
+.fieldRow {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fieldLabel {
+  font-size: 0.82rem;
+  font-weight: 700;
   color: #64748b;
-  margin: 0 0 8px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  font-weight: 600;
 }
 
-.defaultName {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: #f97316;
-  margin: 0;
-  text-transform: capitalize;
+.fieldInput {
+  padding: 9px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: #1e293b;
+  transition: border-color 0.15s;
 }
 
-/* Dimensione selector */
+.fieldInput:focus {
+  outline: none;
+  border-color: #f97316;
+}
+
+/* Dimensione */
 .dimensioneRow {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 14px 24px;
+  padding: 16px 24px;
   border-bottom: 1px solid #f1f5f9;
 }
 
@@ -121,54 +135,7 @@
   color: #c2410c;
 }
 
-/* Summary */
-.summary {
-  padding: 20px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.summaryRow {
-  display: flex;
-  gap: 8px;
-  align-items: baseline;
-}
-
-.summaryLabel {
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: #64748b;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  min-width: 90px;
-}
-
-.summaryValue {
-  font-size: 0.95rem;
-  color: #1e293b;
-}
-
-.editBtn {
-  margin-top: 8px;
-  align-self: flex-start;
-  padding: 8px 20px;
-  background: #f1f5f9;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #475569;
-  cursor: pointer;
-  transition: background 0.15s, border-color 0.15s;
-}
-
-.editBtn:hover {
-  background: #e2e8f0;
-  border-color: #cbd5e1;
-}
-
-/* Editor */
+/* Editor ingredienti */
 .editor {
   padding: 20px 24px;
   display: flex;
@@ -224,23 +191,6 @@
   height: 15px;
 }
 
-.resetBtn {
-  align-self: flex-start;
-  padding: 7px 16px;
-  background: none;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 0.85rem;
-  color: #94a3b8;
-  cursor: pointer;
-  transition: color 0.15s, border-color 0.15s;
-}
-
-.resetBtn:hover {
-  color: #475569;
-  border-color: #94a3b8;
-}
-
 /* Actions */
 .actions {
   display: flex;
@@ -267,7 +217,7 @@
   background: #e2e8f0;
 }
 
-.confirmBtn {
+.saveBtn {
   flex: 2;
   padding: 12px;
   background: #f97316;
@@ -280,11 +230,16 @@
   transition: background 0.15s, transform 0.1s;
 }
 
-.confirmBtn:hover {
+.saveBtn:hover:not(:disabled) {
   background: #ea6c0a;
   transform: translateY(-1px);
 }
 
-.confirmBtn:active {
+.saveBtn:active:not(:disabled) {
   transform: translateY(0);
+}
+
+.saveBtn:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
 }

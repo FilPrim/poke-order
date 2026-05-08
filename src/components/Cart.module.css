@@ -90,6 +90,44 @@
   background: #fef2f2;
 }
 
+.itemDimensione {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #94a3b8;
+}
+
+.orarioRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.orarioLabel {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #64748b;
+  white-space: nowrap;
+}
+
+.orarioSelect {
+  flex: 1;
+  padding: 9px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  color: #1e293b;
+  background: #ffffff;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.orarioSelect:focus {
+  outline: none;
+  border-color: #f97316;
+}
+
 .whatsappBtn {
   width: 100%;
   padding: 16px;
@@ -114,4 +152,10 @@
 
 .whatsappBtn:active {
   transform: translateY(0);
+}
+
+.whatsappBtn:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+  transform: none;
 }
