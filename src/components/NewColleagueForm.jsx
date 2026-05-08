@@ -1,7 +1,7 @@
 // Form modale per aggiungere un nuovo collega con la sua poké base.
 // Campi: nome, cognome, dimensione (Regular/Large) e checkbox per categoria
-// identiche a quelle di PokeEditor. Blocca i nomi gia' presenti tra i colleghi
-// (controllo case-insensitive su trim) mostrando un errore inline.
+// identiche a quelle di PokeEditor. Blocca le coppie nome+cognome gia' presenti
+// tra i colleghi (controllo case-insensitive su trim) mostrando un errore inline.
 import { useState } from 'react';
 import styles from './NewColleagueForm.module.css';
 
@@ -49,10 +49,18 @@ function NewColleagueForm({ ingredients, colleghi = [], onSave, onCancel }) {
     if (nameError) setNameError('');
   }
 
-  function isNameDuplicate(nameTrimmed) {
-    const target = nameTrimmed.toLowerCase();
+  function handleCognomeChange(e) {
+    setCognome(e.target.value);
+    if (nameError) setNameError('');
+  }
+
+  function isCombinationDuplicate(nomeTrimmed, cognomeTrimmed) {
+    const targetNome = nomeTrimmed.toLowerCase();
+    const targetCognome = cognomeTrimmed.toLowerCase();
     return colleghi.some(
-      (c) => (c.nome || '').trim().toLowerCase() === target,
+      (c) =>
+        (c.nome || '').trim().toLowerCase() === targetNome &&
+        (c.cognome || '').trim().toLowerCase() === targetCognome,
     );
   }
 
@@ -60,15 +68,17 @@ function NewColleagueForm({ ingredients, colleghi = [], onSave, onCancel }) {
     const nomeTrimmed = nome.trim();
     if (!nomeTrimmed) return;
 
-    if (isNameDuplicate(nomeTrimmed)) {
-      setNameError('Nome gia\u0027 in uso, scegline un altro');
+    const cognomeTrimmed = cognome.trim();
+
+    if (isCombinationDuplicate(nomeTrimmed, cognomeTrimmed)) {
+      setNameError('Esiste gia\u0027 un collega con questo nome e cognome');
       return;
     }
 
     const newColleague = {
       id: Date.now(),
       nome: nomeTrimmed,
-      cognome: cognome.trim(),
+      cognome: cognomeTrimmed,
       pokeBase: { ...poke },
     };
     onSave(newColleague);
@@ -111,7 +121,7 @@ function NewColleagueForm({ ingredients, colleghi = [], onSave, onCancel }) {
               type="text"
               className={styles.fieldInput}
               value={cognome}
-              onChange={(e) => setCognome(e.target.value)}
+              onChange={handleCognomeChange}
               placeholder="Es. Rossi"
             />
           </div>

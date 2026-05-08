@@ -49,7 +49,7 @@ Il flusso principale è: selezione collega -> conferma/modifica poke -> carrello
 - `src/components/PokeEditor.module.css` — stile modale editor.
 - `src/components/Cart.jsx` — carrello, rimozione ordini, scelta orario, invio WhatsApp.
 - `src/components/Cart.module.css` — stile carrello/select orario/bottone invio.
-- `src/components/NewColleagueForm.jsx` — modale per creare nuovo collega e poke base, con validazione nome duplicato (case-insensitive).
+- `src/components/NewColleagueForm.jsx` — modale per creare nuovo collega e poke base, con validazione duplicati sulla coppia nome+cognome (case-insensitive su entrambi i campi).
 - `src/components/NewColleagueForm.module.css` — stile modale creazione, incluso stato di errore sul campo nome.
 - `src/components/ThemeToggle.jsx` — bottone tondo nell'header per alternare tema chiaro/scuro.
 - `src/components/ThemeToggle.module.css` — stile bottone toggle tema.
@@ -76,14 +76,14 @@ Il flusso principale è: selezione collega -> conferma/modifica poke -> carrello
 - Selezione orario obbligatoria prima dell’invio WhatsApp.
 - Messaggio WhatsApp formattato e apertura `wa.me`.
 - Tema chiaro/scuro con toggle nell'header, persistito in `localStorage` (`poke_order_theme`) e fallback a `prefers-color-scheme`.
-- Blocco creazione collega con nome duplicato (case-insensitive) con messaggio di errore inline.
+- Blocco creazione collega con coppia nome+cognome duplicata (case-insensitive su entrambi i campi) con messaggio di errore inline.
 
 ## Ultime modifiche (3-5 più recenti)
+- **Fix validazione duplicati** in `NewColleagueForm`: il blocco scatta solo sulla coppia nome+cognome (case-insensitive), così due colleghi con stesso nome e cognome diverso possono coesistere; reset dell'errore anche al cambio del campo cognome.
 - Introdotto **dark mode** con toggle nell'header, CSS custom properties in `src/index.css`, persistenza in `localStorage` (`poke_order_theme`) e fallback su `prefers-color-scheme`.
 - Migrati tutti i CSS Modules dei componenti alle nuove variabili semantiche (sfondi, testi, bordi, accent, soft states).
 - Aggiunto componente `ThemeToggle`.
-- Implementata **validazione nomi duplicati** in `NewColleagueForm` (case-insensitive su `nome.trim()`) con messaggio di errore inline e stile rosso del campo.
-- Aggiornato `PROJECT_CONTEXT.md`.
+- Implementata validazione duplicati in `NewColleagueForm` con messaggio di errore inline e stile rosso del campo.
 
 ## Prossimi passi
 - Valutare sincronizzazione dati tra `data.json` e `localStorage` (seed/migrazione/reset) per evitare divergenze.
