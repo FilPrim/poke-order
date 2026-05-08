@@ -1,15 +1,17 @@
 // Componente principale dell'app Poke Order.
 // Gestisce lo stato globale: colleghi (con persistenza localStorage), collega selezionato,
-// carrello e visibilità del form per aggiungere un nuovo collega.
-import { useState } from 'react';
+// carrello, visibilità del form per aggiungere un nuovo collega e tema chiaro/scuro.
+import { useEffect, useState } from 'react';
 import { colleghi as colleghi_default, ingredienti } from './data/data.json';
 import ColleagueList from './components/ColleagueList';
 import PokeEditor from './components/PokeEditor';
 import Cart from './components/Cart';
 import NewColleagueForm from './components/NewColleagueForm';
+import ThemeToggle from './components/ThemeToggle';
 import styles from './App.module.css';
 
 const LS_KEY = 'poke_order_colleghi';
+const LS_THEME_KEY = 'poke_order_theme';
 
 function loadColleghi() {
   try {
@@ -24,11 +26,34 @@ function saveColleghi(list) {
   localStorage.setItem(LS_KEY, JSON.stringify(list));
 }
 
+function loadInitialTheme() {
+  try {
+    const saved = localStorage.getItem(LS_THEME_KEY);
+    if (saved === 'light' || saved === 'dark') return saved;
+  } catch {
+    // ignora errori di accesso a localStorage
+  }
+  if (typeof window !== 'undefined' && window.matchMedia) {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  return 'light';
+}
+
 function App() {
   const [colleghi, setColleghi] = useState(loadColleghi);
   const [selectedColleague, setSelectedColleague] = useState(null);
   const [cart, setCart] = useState([]);
   const [showNewForm, setShowNewForm] = useState(false);
+  const [theme, setTheme] = useState(loadInitialTheme);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    try {
+      localStorage.setItem(LS_THEME_KEY, theme);
+    } catch {
+      // ignora errori di persistenza
+    }
+  }, [theme]);
 
   const cartIds = new Set(cart.map((item) => item.colleague.id));
 
@@ -70,11 +95,18 @@ function App() {
     setShowNewForm(false);
   }
 
+  function toggleTheme() {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  }
+
   return (
     <div className={styles.app}>
       <header className={styles.header}>
         <h1 className={styles.logo}>🍣 Poke Order</h1>
         <p className={styles.subtitle}>Gestisci gli ordini del tuo ufficio</p>
+        <div className={styles.headerActions}>
+          <ThemeToggle theme={theme} onToggle={toggleTheme} />
+        </div>
       </header>
 
       <main className={styles.main}>
@@ -104,6 +136,7 @@ function App() {
       {showNewForm && (
         <NewColleagueForm
           ingredients={ingredienti}
+          colleghi={colleghi}
           onSave={handleAddColleague}
           onCancel={() => setShowNewForm(false)}
         />

@@ -1,6 +1,7 @@
 // Form modale per aggiungere un nuovo collega con la sua poké base.
 // Campi: nome, cognome, dimensione (Regular/Large) e checkbox per categoria
-// identiche a quelle di PokeEditor.
+// identiche a quelle di PokeEditor. Blocca i nomi gia' presenti tra i colleghi
+// (controllo case-insensitive su trim) mostrando un errore inline.
 import { useState } from 'react';
 import styles from './NewColleagueForm.module.css';
 
@@ -23,10 +24,11 @@ const POKE_VUOTA = {
   toppings: [],
 };
 
-function NewColleagueForm({ ingredients, onSave, onCancel }) {
+function NewColleagueForm({ ingredients, colleghi = [], onSave, onCancel }) {
   const [nome, setNome] = useState('');
   const [cognome, setCognome] = useState('');
   const [poke, setPoke] = useState({ ...POKE_VUOTA });
+  const [nameError, setNameError] = useState('');
 
   function handleToggleIngredient(category, item) {
     setPoke((prev) => {
@@ -42,11 +44,30 @@ function NewColleagueForm({ ingredients, onSave, onCancel }) {
     setPoke((prev) => ({ ...prev, dimensione: val }));
   }
 
+  function handleNomeChange(e) {
+    setNome(e.target.value);
+    if (nameError) setNameError('');
+  }
+
+  function isNameDuplicate(nameTrimmed) {
+    const target = nameTrimmed.toLowerCase();
+    return colleghi.some(
+      (c) => (c.nome || '').trim().toLowerCase() === target,
+    );
+  }
+
   function handleSave() {
-    if (!nome.trim()) return;
+    const nomeTrimmed = nome.trim();
+    if (!nomeTrimmed) return;
+
+    if (isNameDuplicate(nomeTrimmed)) {
+      setNameError('Nome gia\u0027 in uso, scegline un altro');
+      return;
+    }
+
     const newColleague = {
       id: Date.now(),
-      nome: nome.trim(),
+      nome: nomeTrimmed,
       cognome: cognome.trim(),
       pokeBase: { ...poke },
     };
@@ -69,12 +90,19 @@ function NewColleagueForm({ ingredients, onSave, onCancel }) {
             <input
               id="new-nome"
               type="text"
-              className={styles.fieldInput}
+              className={`${styles.fieldInput} ${nameError ? styles.fieldInputError : ''}`}
               value={nome}
-              onChange={(e) => setNome(e.target.value)}
+              onChange={handleNomeChange}
               placeholder="Es. Marco"
+              aria-invalid={Boolean(nameError)}
+              aria-describedby={nameError ? 'new-nome-error' : undefined}
               autoFocus
             />
+            {nameError && (
+              <span id="new-nome-error" className={styles.errorMsg} role="alert">
+                {nameError}
+              </span>
+            )}
           </div>
           <div className={styles.fieldRow}>
             <label className={styles.fieldLabel} htmlFor="new-cognome">Cognome</label>

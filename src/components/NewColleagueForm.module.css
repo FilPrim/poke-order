@@ -1,7 +1,7 @@
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45);
+  background: var(--bg-overlay);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,7 +10,7 @@
 }
 
 .panel {
-  background: #ffffff;
+  background: var(--bg-surface);
   border-radius: 16px;
   width: 100%;
   max-width: 560px;
@@ -18,7 +18,7 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-modal);
 }
 
 .header {
@@ -31,7 +31,7 @@
 .title {
   font-size: 1.4rem;
   font-weight: 700;
-  color: #1e293b;
+  color: var(--text-primary);
   margin: 0;
 }
 
@@ -39,7 +39,7 @@
   background: none;
   border: none;
   font-size: 1.1rem;
-  color: #94a3b8;
+  color: var(--text-muted);
   cursor: pointer;
   padding: 4px 8px;
   border-radius: 6px;
@@ -47,8 +47,8 @@
 }
 
 .closeBtn:hover {
-  color: #1e293b;
-  background: #f1f5f9;
+  color: var(--text-primary);
+  background: var(--bg-surface-2);
 }
 
 /* Campi nome/cognome */
@@ -68,24 +68,42 @@
 .fieldLabel {
   font-size: 0.82rem;
   font-weight: 700;
-  color: #64748b;
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
 
 .fieldInput {
   padding: 9px 12px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border);
   border-radius: 8px;
   font-size: 0.95rem;
   font-family: inherit;
-  color: #1e293b;
-  transition: border-color 0.15s;
+  color: var(--text-primary);
+  background: var(--bg-surface);
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
 
 .fieldInput:focus {
   outline: none;
-  border-color: #f97316;
+  border-color: var(--accent);
+}
+
+.fieldInputError {
+  border-color: var(--danger);
+  background: var(--danger-soft-bg);
+}
+
+.fieldInputError:focus {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.18);
+}
+
+.errorMsg {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--danger);
+  margin-top: 2px;
 }
 
 /* Dimensione */
@@ -94,13 +112,13 @@
   align-items: center;
   gap: 12px;
   padding: 16px 24px;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--border);
 }
 
 .dimensioneLabel {
   font-size: 0.82rem;
   font-weight: 700;
-  color: #64748b;
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   white-space: nowrap;
@@ -116,11 +134,11 @@
   align-items: center;
   gap: 6px;
   padding: 6px 16px;
-  border: 2px solid #e2e8f0;
+  border: 2px solid var(--border);
   border-radius: 99px;
   font-size: 0.9rem;
   font-weight: 600;
-  color: #64748b;
+  color: var(--text-secondary);
   cursor: pointer;
   transition: border-color 0.15s, background 0.15s, color 0.15s;
 }
@@ -130,9 +148,9 @@
 }
 
 .sizeSelected {
-  border-color: #f97316;
-  background: #fff7ed;
-  color: #c2410c;
+  border-color: var(--accent);
+  background: var(--accent-soft-bg);
+  color: var(--accent-soft-text);
 }
 
 /* Editor ingredienti */
@@ -152,7 +170,7 @@
 .categoryTitle {
   font-size: 0.82rem;
   font-weight: 700;
-  color: #64748b;
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   margin: 0;
@@ -169,24 +187,24 @@
   align-items: center;
   gap: 6px;
   font-size: 0.9rem;
-  color: #334155;
+  color: var(--text-primary);
   cursor: pointer;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 6px 12px;
   transition: background 0.15s, border-color 0.15s;
 }
 
 .checkboxLabel:has(input:checked) {
-  background: #fff7ed;
-  border-color: #fdba74;
-  color: #c2410c;
+  background: var(--accent-soft-bg);
+  border-color: var(--accent-soft-border);
+  color: var(--accent-soft-text);
   font-weight: 600;
 }
 
 .checkboxLabel input {
-  accent-color: #f97316;
+  accent-color: var(--accent);
   width: 15px;
   height: 15px;
 }
@@ -196,42 +214,42 @@
   display: flex;
   gap: 12px;
   padding: 16px 24px 24px;
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid var(--border);
   margin-top: auto;
 }
 
 .cancelBtn {
   flex: 1;
   padding: 12px;
-  background: #f1f5f9;
+  background: var(--bg-surface-2);
   border: none;
   border-radius: 10px;
   font-size: 0.95rem;
   font-weight: 600;
-  color: #64748b;
+  color: var(--text-secondary);
   cursor: pointer;
   transition: background 0.15s;
 }
 
 .cancelBtn:hover {
-  background: #e2e8f0;
+  background: var(--border);
 }
 
 .saveBtn {
   flex: 2;
   padding: 12px;
-  background: #f97316;
+  background: var(--accent);
   border: none;
   border-radius: 10px;
   font-size: 0.95rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--text-on-accent);
   cursor: pointer;
   transition: background 0.15s, transform 0.1s;
 }
 
 .saveBtn:hover:not(:disabled) {
-  background: #ea6c0a;
+  background: var(--accent-hover);
   transform: translateY(-1px);
 }
 
@@ -240,6 +258,6 @@
 }
 
 .saveBtn:disabled {
-  background: #94a3b8;
+  background: var(--disabled-bg);
   cursor: not-allowed;
 }
