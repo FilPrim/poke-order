@@ -1,7 +1,7 @@
 // Mostra la poké base di un collega e permette di modificarla prima di confermarla.
 // Se il collega ha defaultPoke:true, mostra solo il nome fisso senza editor.
-// Altrimenti mostra un riepilogo della poké base con possibilità di entrare in modalità modifica
-// (checkbox per categoria, con quelle della base già spuntate).
+// Altrimenti mostra un selettore dimensione (Regular/Large) sempre visibile,
+// un riepilogo degli ingredienti e la modalità modifica con checkbox per categoria.
 import { useState } from 'react';
 import styles from './PokeEditor.module.css';
 
@@ -12,6 +12,8 @@ const CATEGORIE = [
   { key: 'salse', label: 'Salse' },
   { key: 'toppings', label: 'Toppings' },
 ];
+
+const DIMENSIONI = ['regular', 'large'];
 
 function PokeEditor({ colleague, ingredients, onConfirm, onCancel }) {
   const isDefault = colleague.pokeBase.defaultPoke === true;
@@ -27,6 +29,10 @@ function PokeEditor({ colleague, ingredients, onConfirm, onCancel }) {
         : [...list, item];
       return { ...prev, [category]: updated };
     });
+  }
+
+  function handleDimensioneChange(val) {
+    setCurrentPoke((prev) => ({ ...prev, dimensione: val }));
   }
 
   function handleConfirm() {
@@ -55,25 +61,42 @@ function PokeEditor({ colleague, ingredients, onConfirm, onCancel }) {
           </div>
         ) : (
           <>
+            <div className={styles.dimensioneRow}>
+              <span className={styles.dimensioneLabel}>Dimensione:</span>
+              <div className={styles.dimensioneOptions}>
+                {DIMENSIONI.map((size) => (
+                  <label
+                    key={size}
+                    className={`${styles.sizeOption} ${currentPoke.dimensione === size ? styles.sizeSelected : ''}`}
+                  >
+                    <input
+                      type="radio"
+                      name="dimensione"
+                      value={size}
+                      checked={currentPoke.dimensione === size}
+                      onChange={() => handleDimensioneChange(size)}
+                    />
+                    {size.charAt(0).toUpperCase() + size.slice(1)}
+                  </label>
+                ))}
+              </div>
+            </div>
+
             {!isEditing ? (
               <div className={styles.summary}>
                 {CATEGORIE.map(({ key, label }) => (
-                  currentPoke[key].length > 0 && (
+                  currentPoke[key] && currentPoke[key].length > 0 && (
                     <div key={key} className={styles.summaryRow}>
                       <span className={styles.summaryLabel}>{label}:</span>
                       <span className={styles.summaryValue}>{currentPoke[key].join(', ')}</span>
                     </div>
                   )
                 ))}
-                <div className={styles.summaryRow}>
-                  <span className={styles.summaryLabel}>Dimensione:</span>
-                  <span className={styles.summaryValue}>{currentPoke.dimensione}</span>
-                </div>
                 <button
                   className={styles.editBtn}
                   onClick={() => setIsEditing(true)}
                 >
-                  Modifica
+                  Modifica ingredienti
                 </button>
               </div>
             ) : (
@@ -86,7 +109,7 @@ function PokeEditor({ colleague, ingredients, onConfirm, onCancel }) {
                         <label key={item} className={styles.checkboxLabel}>
                           <input
                             type="checkbox"
-                            checked={currentPoke[key].includes(item)}
+                            checked={(currentPoke[key] || []).includes(item)}
                             onChange={() => handleToggleIngredient(key, item)}
                           />
                           {item}
