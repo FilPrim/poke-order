@@ -54,6 +54,20 @@
   min-width: 0;
 }
 
+.statusMessage {
+  text-align: center;
+  padding: 48px 32px;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.errorMessage {
+  text-align: center;
+  padding: 48px 32px;
+  color: #ef4444;
+  font-size: 1rem;
+}
+
 @media (max-width: 900px) {
   .main {
     grid-template-columns: 1fr;

@@ -44,13 +44,15 @@ function buildWhatsAppMessage(cart, orario) {
   return `${header}\n\n${pokeLines.join('\n\n')}\n\nGrazie mille,\nFilippo`;
 }
 
-function Cart({ cart, onRemove }) {
+function Cart({ cart, onRemove, onClearCart }) {
   const [orario, setOrario] = useState('');
 
   function handleSendWhatsApp() {
     const message = buildWhatsAppMessage(cart, orario);
     const encoded = encodeURIComponent(message);
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`, '_blank');
+    if (onClearCart) onClearCart();
+    setOrario('');
   }
 
   if (cart.length === 0) {
