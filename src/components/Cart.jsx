@@ -1,9 +1,10 @@
 // Mostra le poké confermate nel carrello con possibilità di rimozione.
 // Contiene il selettore dell'orario e il bottone "Manda su WhatsApp" che costruisce
 // il messaggio nel formato corretto e apre WhatsApp Web con il testo già pronto.
+// Prima dell'invio si apre una modale che richiede SEND_PASSWORD (src/config.js).
 // Il bottone WhatsApp è disabilitato finché non viene scelto un orario.
-import { useState } from 'react';
-import { WHATSAPP_NUMBER } from '../config';
+import { useEffect, useState } from 'react';
+import { SEND_PASSWORD, WHATSAPP_NUMBER } from '../config';
 import styles from './Cart.module.css';
 
 const ORARI = ['12:30', '12:45', '13:00', '13:15', '13:30'];
@@ -44,13 +45,53 @@ function buildWhatsAppMessage(cart, orario) {
   return `${header}\n\n${pokeLines.join('\n\n')}\n\nGrazie mille,\nFilippo`;
 }
 
-function Cart({ cart, onRemove }) {
+function Cart({ cart, onRemove, onClearCart }) {
   const [orario, setOrario] = useState('');
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [passwordInput, setPasswordInput] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
+  function closePasswordModal() {
+    setShowPasswordModal(false);
+    setPasswordInput('');
+    setPasswordError('');
+  }
+
+  function openPasswordModal() {
+    setPasswordInput('');
+    setPasswordError('');
+    setShowPasswordModal(true);
+  }
+
+  useEffect(() => {
+    if (!showPasswordModal) return;
+    function onKeyDown(e) {
+      if (e.key === 'Escape') {
+        setShowPasswordModal(false);
+        setPasswordInput('');
+        setPasswordError('');
+      }
+    }
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [showPasswordModal]);
 
   function handleSendWhatsApp() {
     const message = buildWhatsAppMessage(cart, orario);
     const encoded = encodeURIComponent(message);
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`, '_blank');
+    if (onClearCart) onClearCart();
+    closePasswordModal();
+    setOrario('');
+  }
+
+  function handleConfirmPassword(e) {
+    e.preventDefault();
+    if (passwordInput !== SEND_PASSWORD) {
+      setPasswordError('Password errata. Riprova.');
+      return;
+    }
+    handleSendWhatsApp();
   }
 
   if (cart.length === 0) {
@@ -119,13 +160,62 @@ function Cart({ cart, onRemove }) {
       </div>
 
       <button
+        type="button"
         className={styles.whatsappBtn}
-        onClick={handleSendWhatsApp}
+        onClick={openPasswordModal}
         disabled={!orario}
         title={!orario ? 'Seleziona prima un orario' : ''}
       >
         <span>Manda ordine su WhatsApp</span>
       </button>
+
+      {showPasswordModal && (
+        <div
+          className={styles.modalOverlay}
+          role="presentation"
+          onClick={(ev) => {
+            if (ev.target === ev.currentTarget) closePasswordModal();
+          }}
+        >
+          <div
+            className={styles.modalPanel}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="cart-password-title"
+          >
+            <h3 id="cart-password-title" className={styles.modalTitle}>
+              Conferma invio ordine
+            </h3>
+            <p className={styles.modalHint}>Inserisci la password per aprire WhatsApp con il messaggio pronto.</p>
+            <form className={styles.modalForm} onSubmit={handleConfirmPassword}>
+              <label className={styles.modalLabel} htmlFor="cart-send-password">
+                Password
+              </label>
+              <input
+                id="cart-send-password"
+                className={styles.modalInput}
+                type="password"
+                autoComplete="off"
+                value={passwordInput}
+                onChange={(e) => {
+                  setPasswordInput(e.target.value);
+                  if (passwordError) setPasswordError('');
+                }}
+                autoFocus
+              />
+              {passwordError ? <p className={styles.modalError}>{passwordError}</p> : null}
+              <div className={styles.modalActions}>
+                <button type="button" className={styles.modalBtnSecondary} onClick={closePasswordModal}>
+                  Annulla
+                </button>
+                <button type="submit" className={styles.modalBtnPrimary}>
+                  Invia ordine
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

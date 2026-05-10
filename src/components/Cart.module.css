@@ -159,3 +159,112 @@
   cursor: not-allowed;
   transform: none;
 }
+
+/* Modale password prima dell'invio WhatsApp */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 120;
+  padding: 16px;
+}
+
+.modalPanel {
+  background: var(--bg-surface);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 400px;
+  padding: 24px;
+  box-shadow: var(--shadow-modal);
+  border: 1px solid var(--border);
+}
+
+.modalTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 8px 0;
+}
+
+.modalHint {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin: 0 0 16px 0;
+  line-height: 1.45;
+}
+
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modalLabel {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.modalInput {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--text-primary);
+  background: var(--bg-surface);
+}
+
+.modalInput:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.modalError {
+  font-size: 0.82rem;
+  color: var(--danger);
+  margin: 0;
+}
+
+.modalActions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+.modalBtnSecondary,
+.modalBtnPrimary {
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.modalBtnSecondary {
+  background: var(--bg-surface-2);
+  color: var(--text-secondary);
+}
+
+.modalBtnSecondary:hover {
+  background: var(--border);
+  color: var(--text-primary);
+}
+
+.modalBtnPrimary {
+  background: var(--whatsapp);
+  color: var(--text-on-accent);
+}
+
+.modalBtnPrimary:hover {
+  background: var(--whatsapp-hover);
+}
