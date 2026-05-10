@@ -35,7 +35,7 @@ Il flusso principale è: selezione collega -> conferma/modifica poke -> carrello
 - `src/App.module.css` — layout principale app + posizionamento toggle tema nell'header.
 - `src/index.css` — reset, stili globali base e custom properties (CSS variables) per light/dark theme.
 - `src/App.css` — file legacy Vite non usato.
-- `src/config.js` — numero WhatsApp centralizzato.
+- `src/config.js` — numero WhatsApp centralizzato e costante `SEND_PASSWORD` per il gate prima dell'invio messaggio.
 
 ### Dati
 - `src/data/data.json` — elenco colleghi e catalogo ingredienti per categorie.
@@ -47,8 +47,8 @@ Il flusso principale è: selezione collega -> conferma/modifica poke -> carrello
 - `src/components/ColleagueCard.module.css` — stile card, badge, disabled, delete button.
 - `src/components/PokeEditor.jsx` — modale modifica poke (ingredienti + dimensione regular/large).
 - `src/components/PokeEditor.module.css` — stile modale editor.
-- `src/components/Cart.jsx` — carrello, rimozione ordini, scelta orario, invio WhatsApp.
-- `src/components/Cart.module.css` — stile carrello/select orario/bottone invio.
+- `src/components/Cart.jsx` — carrello, rimozione ordini, scelta orario; modale password prima di aprire WhatsApp.
+- `src/components/Cart.module.css` — stile carrello, select orario, bottone WhatsApp e modale password.
 - `src/components/NewColleagueForm.jsx` — modale per creare nuovo collega e poke base, con validazione duplicati sulla coppia nome+cognome (case-insensitive su entrambi i campi).
 - `src/components/NewColleagueForm.module.css` — stile modale creazione, incluso stato di errore sul campo nome.
 - `src/components/ThemeToggle.jsx` — bottone tondo nell'header per alternare tema chiaro/scuro.
@@ -74,11 +74,12 @@ Il flusso principale è: selezione collega -> conferma/modifica poke -> carrello
 - Creazione nuovo collega con poke via modale.
 - Persistenza colleghi in `localStorage` (`poke_order_colleghi`).
 - Selezione orario obbligatoria prima dell’invio WhatsApp.
-- Messaggio WhatsApp formattato e apertura `wa.me`.
+- Messaggio WhatsApp formattato e apertura `wa.me` dopo conferma con password definita in `src/config.js` (`SEND_PASSWORD`); protezione solo lato client per uso interno.
 - Tema chiaro/scuro con toggle nell'header, persistito in `localStorage` (`poke_order_theme`) e fallback a `prefers-color-scheme`.
 - Blocco creazione collega con coppia nome+cognome duplicata (case-insensitive su entrambi i campi) con messaggio di errore inline.
 
 ## Ultime modifiche (3-5 più recenti)
+- Aggiunto **password gate** prima dell'invio su WhatsApp: modale in `Cart.jsx` con campo password, messaggio di errore inline e valore atteso in `SEND_PASSWORD` su `src/config.js` (solo barriera interna, password in chiaro nel bundle).
 - **Fix validazione duplicati** in `NewColleagueForm`: il blocco scatta solo sulla coppia nome+cognome (case-insensitive), così due colleghi con stesso nome e cognome diverso possono coesistere; reset dell'errore anche al cambio del campo cognome.
 - Introdotto **dark mode** con toggle nell'header, CSS custom properties in `src/index.css`, persistenza in `localStorage` (`poke_order_theme`) e fallback su `prefers-color-scheme`.
 - Migrati tutti i CSS Modules dei componenti alle nuove variabili semantiche (sfondi, testi, bordi, accent, soft states).

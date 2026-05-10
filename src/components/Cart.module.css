@@ -159,3 +159,116 @@
   cursor: not-allowed;
   transform: none;
 }
+
+/* Modale password conferma invio */
+.pwdOverlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 110;
+  padding: 16px;
+}
+
+.pwdPanel {
+  background: var(--bg-surface);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 400px;
+  padding: 24px;
+  box-shadow: var(--shadow-modal);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pwdTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.pwdHint {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0 0 4px 0;
+}
+
+.pwdLabel {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.pwdInput {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--text-primary);
+  background: var(--bg-surface);
+  transition: border-color 0.15s;
+}
+
+.pwdInput:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.pwdError {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--danger);
+  margin: 0;
+}
+
+.pwdActions {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.pwdCancelBtn {
+  flex: 1;
+  padding: 12px;
+  background: var(--bg-surface-2);
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.pwdCancelBtn:hover {
+  background: var(--border);
+}
+
+.pwdConfirmBtn {
+  flex: 1;
+  padding: 12px;
+  background: var(--whatsapp);
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-on-accent);
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.pwdConfirmBtn:hover {
+  background: var(--whatsapp-hover);
+  transform: translateY(-1px);
+}
+
+.pwdConfirmBtn:active {
+  transform: translateY(0);
+}
