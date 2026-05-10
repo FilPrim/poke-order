@@ -66,22 +66,21 @@ function App() {
       setLoading(true);
       setError(null);
 
-      // 1. Carica colleghi
-      const { data: colleghiRows, error: errColleghi } = await supabase
+      // 1. Conteggio colleghi (head: evita trasferimento righe; count esatto prima del seed anti-duplicati)
+      const { count: colleghiCount, error: errCount } = await supabase
         .from('colleghi')
-        .select('*')
-        .order('id');
+        .select('*', { count: 'exact', head: true });
 
-      if (errColleghi) {
-        setError('Errore nel caricamento dei colleghi: ' + errColleghi.message);
+      if (errCount) {
+        setError('Errore nel caricamento dei colleghi: ' + errCount.message);
         setLoading(false);
         return;
       }
 
       let listaColleghi;
 
-      // 2. Seed se tabella vuota
-      if (colleghiRows.length === 0) {
+      // 2. Seed solo se la tabella e' davvero vuota (evita INSERT ripetuti in race / refresh)
+      if (colleghiCount === 0) {
         const seedRows = colleghi_seed.map(({ nome, cognome, pokeBase }) => ({
           nome,
           cognome,
@@ -98,6 +97,17 @@ function App() {
         }
         listaColleghi = inserted.map(mapCollega);
       } else {
+        const { data: colleghiRows, error: errColleghi } = await supabase
+          .from('colleghi')
+          .select('*')
+          .order('id');
+
+        if (errColleghi) {
+          setError('Errore nel caricamento dei colleghi: ' + errColleghi.message);
+          setLoading(false);
+          return;
+        }
+
         listaColleghi = colleghiRows.map(mapCollega);
       }
 

@@ -38,7 +38,7 @@ Il flusso principale è: selezione collega -> conferma/modifica poke -> carrello
 - `src/App.module.css` — layout principale app + posizionamento toggle tema nell'header; classi `.statusMessage` e `.errorMessage`.
 - `src/index.css` — reset, stili globali base e custom properties (CSS variables) per light/dark theme.
 - `src/App.css` — file legacy Vite non usato.
-- `src/config.js` — numero WhatsApp e password invio ordine centralizzati.
+- `src/config.js` — numero WhatsApp (`WHATSAPP_NUMBER`) e password invio ordine (`SEND_PASSWORD`).
 - `src/supabase.js` — client Supabase inizializzato con le env var `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY`.
 
 ### Dati
@@ -51,7 +51,7 @@ Il flusso principale è: selezione collega -> conferma/modifica poke -> carrello
 - `src/components/ColleagueCard.module.css` — stile card, badge, disabled, delete button.
 - `src/components/PokeEditor.jsx` — modale modifica poke (ingredienti + dimensione regular/large).
 - `src/components/PokeEditor.module.css` — stile modale editor.
-- `src/components/Cart.jsx` — carrello, rimozione ordini, scelta orario, invio WhatsApp; chiama `onClearCart` dopo apertura link.
+- `src/components/Cart.jsx` — carrello, rimozione ordini, scelta orario, modale password (`SEND_PASSWORD`) prima di aprire WhatsApp; chiama `onClearCart` dopo apertura link.
 - `src/components/Cart.module.css` — stile carrello/select orario/bottone invio.
 - `src/components/NewColleagueForm.jsx` — modale per creare nuovo collega e poke base, con validazione duplicati sulla coppia nome+cognome (case-insensitive su entrambi i campi).
 - `src/components/NewColleagueForm.module.css` — stile modale creazione, incluso stato di errore sul campo nome.
@@ -99,12 +99,15 @@ Il flusso principale è: selezione collega -> conferma/modifica poke -> carrello
 - Rimozione collega con conferma (DELETE su Supabase).
 - Creazione nuovo collega con poke via modale (INSERT su Supabase).
 - Selezione orario obbligatoria prima dell'invio WhatsApp.
+- Modale password obbligatoria prima dell'apertura di WhatsApp (password in `src/config.js`).
 - Messaggio WhatsApp formattato e apertura `wa.me`.
 - Tema chiaro/scuro con toggle nell'header, persistito in `localStorage` (`poke_order_theme`) e fallback a `prefers-color-scheme`.
 - Blocco creazione collega con coppia nome+cognome duplicata (case-insensitive) con messaggio di errore inline.
 - Gestione stati `loading` e `error` nell'UI durante il caricamento iniziale da Supabase.
 
 ## Ultime modifiche (3-5 piu recenti)
+- **Password gate invio ordine** ripristinato in `Cart.jsx`: export `SEND_PASSWORD` in `src/config.js`; click su "Manda ordine su WhatsApp" apre una modale; solo dopo password corretta si apre `wa.me` e si svuota il carrello. Stili modale in `Cart.module.css`.
+- **Seed colleghi anti-duplicati** in `App.jsx`: prima del `INSERT` da `data.json` si usa `select('*', { count: 'exact', head: true })` sulla tabella `colleghi`; si inserisce il seed solo se `count === 0`, poi si caricano le righe complete con `select('*').order('id')` se il seed non serve.
 - **Migrazione Supabase**: `colleghi` e `carrello` ora persistiti su Supabase con realtime; rimosso `localStorage` per i dati dei colleghi; `data.json` usato solo come seed iniziale; aggiunto `src/supabase.js`.
 - **Svuotamento carrello automatico** in `Cart.jsx`: dopo apertura link WhatsApp viene chiamata `onClearCart` (DELETE su `carrello`).
 - **Fix validazione duplicati** in `NewColleagueForm`: il blocco scatta sulla coppia nome+cognome (case-insensitive); reset dell'errore anche al cambio cognome.
@@ -112,6 +115,7 @@ Il flusso principale è: selezione collega -> conferma/modifica poke -> carrello
 - Migrati tutti i CSS Modules alle variabili semantiche; aggiunto `ThemeToggle`.
 
 ## Prossimi passi
+- Su **Vercel**, verificare che `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY` siano definite per **Preview** e **Production** (le PR usano Preview): altrimenti l'app in deploy puo fallire a runtime o mostrare errori Supabase.
 - Aggiungere altre validazioni nel form nuovo collega (lunghezza minima, limite ingredienti).
 - Pulire file legacy non usati (`src/App.css`, asset template).
 - Aggiungere test (unit/integration) sui flussi chiave: cart, messaggio WhatsApp, realtime, tema.
