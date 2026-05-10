@@ -125,7 +125,22 @@ Percorso: **Project** → **Settings** → **Deployment Protection**. Se è atti
 ### Altro
 - Usa il **dominio di produzione** (`poke-order.vercel.app`) per test reali; l’iframe nel dashboard puo mostrare 403 anche se il sito va bene.
 
+### Pagina bianca dopo aver configurato le env
+Succede spesso per **cache del browser** dopo un nuovo deploy: `index.html` vecchio punta ancora a un file `.js` con hash precedente (404) → script non parte → schermo bianco. Anche se poi riclicchi da Vercel può persistere finché il browser non aggiorna il HTML.
+
+**Cosa fare:** finestra **anonima/privata**, oppure per quel sito **Svuota dati/cancel cache** (Chrome: DevTools → Application → Storage → Clear site data per `poke-order.vercel.app`), oppure **aggiornamento forzato** (Ctrl+Shift+R). In **DevTools → Rete (Network)** ricarica con «Disabilita cache» attivo e controlla che `index-….js` e `index-….css` restituiscano **200** e non **404**.
+
+Verifica anche su Vercel che le due variabili abbiano la spunta su **Production** e che l’ultimo deploy **Production** sia stato fatto **dopo** aver salvato le env (altrimenti il bundle in produzione è ancora senza valori).
+
+### Checklist: chiunque apra il link deve vedere l’app
+1. **Repository collegato** a Vercel e branch di produzione (spesso `main`) che fa deploy sul dominio che usi.
+2. **`VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY`** nel progetto Vercel con ambiente **Production** selezionato.
+3. **Redeploy** dell’ultimo commit dopo aver aggiunto/modificato le env (build che incorpora le stringhe).
+4. **Deployment Protection**: per accesso anonimo al dominio pubblico, la produzione non deve richiedere login Vercel — regola le impostazioni in **Settings → Deployment Protection** secondo il piano.
+5. **Supabase**: URL e chiave anon sono pubbliche nel frontend per design; per uso interno va bene **RLS disabilitato** come da tuo setup (non espone admin API).
+
 ## Ultime modifiche (3-5 piu recenti)
+- **PROJECT_CONTEXT**: troubleshooting pagina bianca (cache vs hash asset) e checklist accesso pubblico con solo link.
 - **`src/supabase.js` / `App.jsx`**: se mancano le env Supabase, niente `createClient` invalido; messaggio di errore in pagina con istruzioni Vercel.
 - **Password gate invio ordine** ripristinato in `Cart.jsx`: export `SEND_PASSWORD` in `src/config.js`; click su "Manda ordine su WhatsApp" apre una modale; solo dopo password corretta si apre `wa.me` e si svuota il carrello. Stili modale in `Cart.module.css`.
 - **Seed colleghi anti-duplicati** in `App.jsx`: prima del `INSERT` da `data.json` si usa `select('*', { count: 'exact', head: true })` sulla tabella `colleghi`; si inserisce il seed solo se `count === 0`, poi si caricano le righe complete con `select('*').order('id')` se il seed non serve.
