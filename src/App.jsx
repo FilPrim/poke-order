@@ -66,6 +66,14 @@ function App() {
       setLoading(true);
       setError(null);
 
+      if (!supabase) {
+        setError(
+          'Mancano le variabili Supabase. Su Vercel: Settings → Environment Variables → aggiungi VITE_SUPABASE_URL (URL del progetto) e VITE_SUPABASE_ANON_KEY (chiave anon, da Supabase → Project Settings → API). Seleziona Production e Preview, salva, poi Deployments → … → Redeploy (le variabili VITE_* sono lette in build).'
+        );
+        setLoading(false);
+        return;
+      }
+
       // 1. Conteggio colleghi (head: evita trasferimento righe; count esatto prima del seed anti-duplicati)
       const { count: colleghiCount, error: errCount } = await supabase
         .from('colleghi')
@@ -180,7 +188,7 @@ function App() {
     init();
 
     return () => {
-      if (channel) supabase.removeChannel(channel);
+      if (channel && supabase) supabase.removeChannel(channel);
     };
   }, []);
 
